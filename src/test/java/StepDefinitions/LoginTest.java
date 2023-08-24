@@ -9,22 +9,29 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
+import Steps.Context;
 
 public class LoginTest {
     HomePage home;
     LoginPage loginpg;
-    Playwright playwright;
-    BrowserType browsertype;
-    Browser browser;
+    //    Playwright playwright;
+//    BrowserType browsertype;
+//    Browser browser;
     Page page;
+    private final String domain;
+
+    public LoginTest(Page page){
+        this.page = page;
+        domain = new Context().getDomain();
+    }
 
     @Given("User Access Douglas Application")
     public void setUp() {
-        playwright = Playwright.create();
-        browsertype = playwright.chromium();
-        browser = browsertype.launch(new BrowserType.LaunchOptions().setHeadless(false));
-        page = browser.newPage();
-        page.navigate("https://www.douglas.de/de");
+        //        playwright = Playwright.create();
+//        browsertype = playwright.chromium();
+//        browser = browsertype.launch(new BrowserType.LaunchOptions().setHeadless(false));
+//        page = browser.newPage();
+        page.navigate(domain);
         home = new HomePage(page);
     }
     @When("user navigate to the login page")
